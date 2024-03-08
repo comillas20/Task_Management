@@ -1,71 +1,47 @@
 import {
-	ArrowDownIcon,
-	ArrowRightIcon,
-	ArrowUpIcon,
-	CheckCircleIcon,
-	CircleIcon,
-	XCircleIcon,
-	HelpCircleIcon,
-	TimerIcon,
+    ArrowDownIcon,
+    ArrowRightIcon,
+    ArrowUpIcon,
+    CheckCircleIcon,
+    XCircleIcon,
+    TimerIcon,
 } from "lucide-react";
 
-export const labels = [
-	{
-		value: "bug",
-		label: "Bug",
-	},
-	{
-		value: "feature",
-		label: "Feature",
-	},
-	{
-		value: "documentation",
-		label: "Documentation",
-	},
-];
-
 export const statuses = [
-	{
-		value: "backlog",
-		label: "Backlog",
-		icon: HelpCircleIcon,
-	},
-	{
-		value: "todo",
-		label: "Todo",
-		icon: CircleIcon,
-	},
-	{
-		value: "in progress",
-		label: "In Progress",
-		icon: TimerIcon,
-	},
-	{
-		value: "done",
-		label: "Done",
-		icon: CheckCircleIcon,
-	},
-	{
-		value: "canceled",
-		label: "Canceled",
-		icon: XCircleIcon,
-	},
+    {
+        value: "ongoing",
+        label: "Ongoing",
+        icon: TimerIcon,
+    },
+    {
+        value: "finished",
+        label: "Finished",
+        icon: CheckCircleIcon,
+    },
+    {
+        value: "canceled",
+        label: "Canceled",
+        icon: XCircleIcon,
+    },
 ];
 
 export const priorities = [
-	{
-		label: "Low",
-		value: "low",
-		icon: ArrowDownIcon,
-	},
-	{
-		label: "Medium",
-		value: "medium",
-		icon: ArrowRightIcon,
-	},
-	{
-		label: "High",
-		value: "high",
-		icon: ArrowUpIcon,
-	},
+    {
+        label: "Low",
+        value: "low",
+        icon: ArrowDownIcon,
+        color: "text-green-500",
+    },
+    {
+        label: "Medium",
+        value: "medium",
+        icon: ArrowRightIcon,
+        color: "text-yellow-500",
+    },
+    {
+        label: "High",
+        value: "high",
+        icon: ArrowUpIcon,
+        color: "text-red-500",
+    },
 ];
