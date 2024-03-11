@@ -33,15 +33,19 @@ export function SelectEmployee({
         }
       }}>
       <SelectTrigger className="min-w-48">
-        <div className="flex items-center gap-2">
-          <span className="font-medium">{selectedEmployee?.name}</span>
-          {selectedEmployee?.position && (
-            <>
-              <span>—</span>
-              <span className="text-xs">{selectedEmployee.position}</span>
-            </>
-          )}
-        </div>
+        {employeeId === -1 ? (
+          <span>Select employee</span>
+        ) : (
+          <div className="flex items-center gap-2">
+            <span className="font-medium">{selectedEmployee?.name}</span>
+            {selectedEmployee?.position && (
+              <>
+                <span>—</span>
+                <span className="text-xs">{selectedEmployee.position}</span>
+              </>
+            )}
+          </div>
+        )}
       </SelectTrigger>
       <SelectContent>
         {data?.map((employee) => (
