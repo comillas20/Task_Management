@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
-import { UserNav } from "./components/user-nav";
-import { TaskDisplay } from "./task-display";
+import { NavigationButton, UserNav } from "@/components/user-nav";
+import { Tasks } from "./components/tasks";
 import { getTasks } from "@/actions/task";
 
 export const metadata: Metadata = {
@@ -17,12 +17,19 @@ export default async function TaskPage() {
         <div>
           <h2 className="text-2xl font-bold tracking-tight">Welcome back!</h2>
           <p className="text-muted-foreground">
-            Here&apos;s a list of your tasks!
+            Here&apos;s a list of your tasks
           </p>
         </div>
-        <UserNav />
+        <UserNav navBtns={navBtns} />
       </div>
-      <TaskDisplay data={tasks} />
+      <Tasks data={tasks} />
     </div>
   );
 }
+
+const navBtns: NavigationButton[] = [
+  {
+    label: "Employees",
+    href: "/employees",
+  },
+];

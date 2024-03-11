@@ -63,7 +63,7 @@ export function TaskDialog({ data, children }: TaskDialogProps) {
         }
       : {
           id: -1,
-          title: undefined,
+          title: "",
           description: null,
           priority: "low",
           status: "ongoing",

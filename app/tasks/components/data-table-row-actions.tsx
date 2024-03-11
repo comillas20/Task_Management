@@ -19,7 +19,7 @@ import {
 
 import { priorities, statuses } from "../data/data";
 import { Task } from "@prisma/client";
-import { TaskDialog, TaskDialogTrigger } from "./dialog-task";
+import { TaskDialog, TaskDialogTrigger } from "./task-dialog";
 import { deleteTask, updatePriority, updateStatus } from "@/actions/task";
 
 interface DataTableRowActionsProps {

@@ -2,15 +2,15 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { priorities, statuses } from "../data/data";
-import { DataTableColumnHeader } from "./data-table-column-header";
+import { DataTableColumnHeader } from "../../../components/data-table-column-header";
 import { DataTableRowActions } from "./data-table-row-actions";
 import { format } from "date-fns";
 import { Prisma } from "@prisma/client";
 
-export type TaskColumn = Prisma.TaskGetPayload<{
+export type TaskColumnType = Prisma.TaskGetPayload<{
   include: { assignedEmployee: true };
 }>;
-export const columns: ColumnDef<TaskColumn>[] = [
+export const taskColumns: ColumnDef<TaskColumnType>[] = [
   {
     accessorKey: "title",
     header: ({ column }) => (

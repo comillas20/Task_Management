@@ -10,11 +10,11 @@ import { format } from "date-fns";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 import Image from "next/image";
-import { TaskColumn } from "./columns";
+import { TaskColumnType } from "./task-columns";
 import { priorities } from "../data/data";
 import { cn } from "@/lib/utils";
 type TaskCardProps = {
-  data: TaskColumn;
+  data: TaskColumnType;
 };
 
 export function TaskCard({ data }: TaskCardProps) {
@@ -25,10 +25,10 @@ export function TaskCard({ data }: TaskCardProps) {
     <Card className="flex min-h-96 flex-col shadow-md">
       <CardHeader className="flex-row justify-between">
         <div className="flex items-center gap-4">
-          <Avatar>
+          {/* <Avatar>
             <AvatarImage />
             <AvatarFallback>CD</AvatarFallback>
-          </Avatar>
+          </Avatar> */}
           <div>
             <h5 className="text-sm font-medium">
               {data?.assignedEmployee.name}
@@ -47,7 +47,11 @@ export function TaskCard({ data }: TaskCardProps) {
       </CardHeader>
       <Separator />
       <CardContent className="flex-1 space-y-4 py-4">
-        <h3 className="text-lg font-medium">{data.title}</h3>
+        <div className="flex items-center justify-between">
+          <h3 className="text-lg font-medium">{data.title}</h3>
+          <span className="text-sm capitalize">{data.status} Task</span>
+        </div>
+
         <p className="text-sm">{data.description ?? "<No description>"}</p>
         {data.imageURL && (
           <AspectRatio

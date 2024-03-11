@@ -17,17 +17,16 @@ import {
   Row,
   RowSelectionState,
 } from "@tanstack/react-table";
-import { TaskCard } from "./components/card-task";
-import { columns } from "./components/columns";
-import { DataTable } from "./components/data-table";
-import { TaskColumn } from "./components/columns";
+import { TaskCard } from "./task-card";
+import { taskColumns, TaskColumnType } from "./task-columns";
+import { DataTable } from "../../../components/data-table";
 import { Card } from "@/components/ui/card";
-import { DataTableToolbar } from "./components/data-table-toolbar";
+import { DataTableToolbar } from "./data-table-toolbar";
 
-type TaskDisplayProps = {
-  data: TaskColumn[];
+type TasksProps = {
+  data: TaskColumnType[];
 };
-export function TaskDisplay({ data }: TaskDisplayProps) {
+export function Tasks({ data }: TasksProps) {
   const [isMounted, setIsMounted] = React.useState(false);
   const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
   const [columnVisibility, setColumnVisibility] =
@@ -42,7 +41,7 @@ export function TaskDisplay({ data }: TaskDisplayProps) {
   });
   const table = useReactTable({
     data,
-    columns,
+    columns: taskColumns,
     state: {
       sorting,
       columnVisibility,
@@ -50,7 +49,7 @@ export function TaskDisplay({ data }: TaskDisplayProps) {
       columnFilters,
       pagination,
     },
-    getRowId: (o: TaskColumn, index: number) => {
+    getRowId: (o: TaskColumnType) => {
       return o.id.toString();
     },
     enableRowSelection: true,
@@ -85,13 +84,13 @@ export function TaskDisplay({ data }: TaskDisplayProps) {
         {selectedTask ? (
           <TaskCard key={selectedTask.id} data={selectedTask} />
         ) : (
-          <Card className="flex min-h-96 items-center justify-center">
+          <Card className="flex min-h-96 items-center justify-center shadow-md">
             <span>Nothing is selected</span>
           </Card>
         )}
       </div>
       <div className="col-span-3">
-        {isMounted && <DataTable columns={columns} table={table} />}
+        {isMounted && <DataTable columns={taskColumns} table={table} />}
       </div>
     </div>
   );

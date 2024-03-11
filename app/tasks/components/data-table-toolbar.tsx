@@ -5,17 +5,17 @@ import { Table } from "@tanstack/react-table";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { NewTask } from "./btn-new-task";
+import { CreateTask } from "./btn-create-task";
 
 import { statuses } from "../data/data";
-import { DataTableFacetedFilter } from "./data-table-faceted-filter";
-import { DataTableViewOptions } from "./data-table-view-options";
+import { DataTableFacetedFilter } from "@/components/data-table-faceted-filter";
+import { DataTableViewOptions } from "@/components/data-table-view-options";
 import { useEmployees } from "@/hooks/employees";
-import { TaskColumn } from "./columns";
+import { TaskColumnType } from "./task-columns";
 import { cn } from "@/lib/utils";
 
 interface DataTableToolbarProps {
-  table: Table<TaskColumn>;
+  table: Table<TaskColumnType>;
   className?: string;
 }
 
@@ -67,7 +67,7 @@ export function DataTableToolbar({ className, table }: DataTableToolbarProps) {
       </div>
       <div className="flex gap-2">
         <DataTableViewOptions table={table} />
-        <NewTask />
+        <CreateTask />
       </div>
     </div>
   );
