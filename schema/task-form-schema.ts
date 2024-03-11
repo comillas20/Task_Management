@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const taskFormSchema = z.object({
   id: z.number(),
-  title: z.string(),
+  title: z.string().min(1, { message: "Title is required" }),
   description: z.string().optional().nullable(),
   status: z.string(),
   priority: z.string(),
@@ -12,7 +12,9 @@ export const taskFormSchema = z.object({
     })
     .optional()
     .nullable(),
-  assignedEmployeeId: z.number(),
+  assignedEmployeeId: z
+    .number()
+    .min(0, { message: "Please select an employee" }),
 });
 // Just in case, they would require unique titles
 // .refine(
