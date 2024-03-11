@@ -27,9 +27,16 @@ model Task {
 }
 
 model Employee {
-  id           Int     @id @default(autoincrement())
-  name         String  @unique
-  position     String?
-  profileURL   String?
-  assignedTask Task[]
+  id            Int           @id @default(autoincrement())
+  name          String        @unique
+  position      String?
+  contactNo     String?
+  email         String?
+  workingStatus WorkingStatus @default(Working)
+  assignedTask  Task[]
+}
+
+enum WorkingStatus {
+  Working
+  Not_Working
 }
