@@ -43,6 +43,10 @@ import { createOrUpdateTask } from "@/actions/task";
 import { imageWrapper } from "@/lib/utils";
 import { Task as T } from "@prisma/client";
 import { SelectEmployee } from "./select-employee";
+import {
+  FormRequiredLabel,
+  FormRequiredMark,
+} from "@/components/form-required-field-mark";
 
 type TaskDialogProps = {
   data?: T;
@@ -115,7 +119,10 @@ export function TaskDialog({ data, children }: TaskDialogProps) {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Employee</FormLabel>
+                  <FormLabel>
+                    Employee
+                    <FormRequiredMark />
+                  </FormLabel>
                   <FormControl>
                     <SelectEmployee
                       employeeId={field.value}
@@ -131,7 +138,10 @@ export function TaskDialog({ data, children }: TaskDialogProps) {
               control={form.control}
               render={({ field }) => (
                 <FormItem className="col-span-2">
-                  <FormLabel>Title</FormLabel>
+                  <FormLabel>
+                    Title
+                    <FormRequiredMark />
+                  </FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
@@ -208,7 +218,10 @@ export function TaskDialog({ data, children }: TaskDialogProps) {
                   control={form.control}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Priority</FormLabel>
+                      <FormLabel>
+                        Priority
+                        <FormRequiredMark />
+                      </FormLabel>
                       <FormControl>
                         <Select
                           value={field.value}
@@ -236,7 +249,10 @@ export function TaskDialog({ data, children }: TaskDialogProps) {
                   control={form.control}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Status</FormLabel>
+                      <FormLabel>
+                        Status
+                        <FormRequiredMark />
+                      </FormLabel>
                       <FormControl>
                         <Select
                           value={field.value}
@@ -261,7 +277,7 @@ export function TaskDialog({ data, children }: TaskDialogProps) {
                 />
               </div>
             </div>
-
+            <FormRequiredLabel />
             <DialogFooter>
               <DialogClose
                 type="button"
