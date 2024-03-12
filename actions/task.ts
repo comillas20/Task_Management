@@ -17,26 +17,10 @@ type ModdifiedTask = {
   image?: FormData;
 } & Task;
 
-export async function saveTask(values: ModdifiedTask) {
+export async function createOrUpdateTask(values: ModdifiedTask) {
   const { id, image, ...others } = values;
   const imageFile = image?.get("file") as File | undefined;
   const filename = imageFile?.name;
-
-  const task = await prisma.task.upsert({
-    create: {
-      ...others,
-      imageURL: filename,
-      assignedEmployeeId: others.assignedEmployeeId,
-    },
-    where: {
-      id: id,
-    },
-    update: {
-      ...others,
-      imageURL: filename,
-      assignedEmployeeId: others.assignedEmployeeId,
-    },
-  });
 
   if (filename && imageFile) {
     // trying to read the directory to see its existence before actually uploading images to it
@@ -49,10 +33,29 @@ export async function saveTask(values: ModdifiedTask) {
     const bytes = await imageFile.arrayBuffer();
     const buffer = Buffer.from(bytes);
     const path = join(process.cwd(), "public/images", imageFile.name);
-    await writeFile(path, buffer);
+
+    const task = await Promise.all([
+      prisma.task.upsert({
+        create: {
+          ...others,
+          imageURL: filename,
+          assignedEmployeeId: others.assignedEmployeeId,
+        },
+        where: {
+          id: id,
+        },
+        update: {
+          ...others,
+          imageURL: filename,
+          assignedEmployeeId: others.assignedEmployeeId,
+        },
+      }),
+      writeFile(path, buffer),
+    ]);
+    revalidatePath("/tasks", "page");
+    return task[0];
   }
-  revalidatePath("/tasks", "page");
-  return task;
+  return null;
 }
 
 // Just in case, they would require unique titles
