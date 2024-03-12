@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -27,16 +21,11 @@ model Task {
 }
 
 model Employee {
-  id            Int           @id @default(autoincrement())
-  name          String        @unique
-  position      String?
-  contactNo     String?
-  email         String?
-  workingStatus WorkingStatus @default(Working)
-  assignedTask  Task[]
-}
-
-enum WorkingStatus {
-  Working
-  Not_Working
+  id           Int     @id @default(autoincrement())
+  name         String  @unique
+  position     String?
+  contactNo    String?
+  email        String?
+  status       String
+  assignedTask Task[]
 }
