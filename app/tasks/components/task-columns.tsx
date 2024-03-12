@@ -83,9 +83,10 @@ export const taskColumns: ColumnDef<TaskColumnType>[] = [
     },
   },
   {
+    id: "Created",
     accessorKey: "createdAt",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Created At" />
+      <DataTableColumnHeader column={column} title="Created" />
     ),
     cell: ({ row }) => format(row.original.createdAt, "PP"),
   },
