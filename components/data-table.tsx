@@ -16,9 +16,14 @@ import { DataTablePagination } from "./data-table-pagination";
 type DataTableProps<TData> = {
   columns: ColumnDef<TData>[];
   table: T<TData>;
+  enableRowSelection?: boolean;
 };
 
-export function DataTable<TData>({ columns, table }: DataTableProps<TData>) {
+export function DataTable<TData>({
+  columns,
+  table,
+  enableRowSelection,
+}: DataTableProps<TData>) {
   return (
     <div className="space-y-4">
       <div className="rounded-md border bg-background shadow-md">
@@ -47,7 +52,9 @@ export function DataTable<TData>({ columns, table }: DataTableProps<TData>) {
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                  onClick={() => row.toggleSelected()}
+                  onClick={() => {
+                    if (enableRowSelection) row.toggleSelected();
+                  }}
                   className="data-[state=selected]:bg-primary data-[state=selected]:text-primary-foreground">
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>

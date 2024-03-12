@@ -90,7 +90,9 @@ export function Tasks({ data }: TasksProps) {
         )}
       </div>
       <div className="col-span-3">
-        {isMounted && <DataTable columns={taskColumns} table={table} />}
+        {isMounted && (
+          <DataTable columns={taskColumns} table={table} enableRowSelection />
+        )}
       </div>
     </div>
   );
