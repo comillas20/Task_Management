@@ -39,7 +39,7 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { Loader2 } from "lucide-react";
-import { saveTask } from "@/actions/task";
+import { createOrUpdateTask } from "@/actions/task";
 import { imageWrapper } from "@/lib/utils";
 import { Task as T } from "@prisma/client";
 import { SelectEmployee } from "./select-employee";
@@ -54,12 +54,7 @@ export function TaskDialog({ data, children }: TaskDialogProps) {
     resolver: zodResolver(taskFormSchema),
     defaultValues: data
       ? {
-          id: data.id,
-          title: data.title,
-          description: data.description,
-          priority: data.priority,
-          status: data.status,
-          assignedEmployeeId: data.assignedEmployeeId,
+          ...data,
         }
       : {
           id: -1,
@@ -75,7 +70,7 @@ export function TaskDialog({ data, children }: TaskDialogProps) {
     // server actions can't take complex objects such as Files
     // so I had to wrap the image with FormData
     const image = values.image ? imageWrapper(values.image as File) : undefined;
-    const task = await saveTask({ ...values, image });
+    const task = await createOrUpdateTask({ ...values, image });
 
     if (task) {
       toast({
