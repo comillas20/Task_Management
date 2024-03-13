@@ -6,7 +6,7 @@ import { getEmployees } from "@/actions/employee";
 export const metadata: Metadata = {
   title: "Employees",
 };
-/* A page  to display all employees in the database */
+/* A page to display all employees in the database */
 export default async function EmployeePage() {
   const employees = await getEmployees();
   return (

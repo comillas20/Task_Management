@@ -25,7 +25,7 @@ export async function createOrUpdateEmployee(data: Employee) {
   revalidatePath("/employee", "page");
   return employee;
 }
-/*This is used to update the status of employees*/
+/*This is used to update the status of employeess*/
 export async function updateStatus(id: number, status: string) {
   const employee = await prisma.employee.update({
     data: {

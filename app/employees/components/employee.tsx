@@ -22,7 +22,7 @@ import { DataTable } from "@/components/data-table";
 import { Employee as em } from "@prisma/client";
 import { DataTableToolbar } from "./data-table-toolbar";
 
-/* A  component that displays a table of employees */
+/* A component that displays a table of employees */
 type EmployeeProps = {
   data: em[];
 };

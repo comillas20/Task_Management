@@ -128,7 +128,7 @@ export async function deleteTask(id: number) {
 }
 
 /* This function and the function below is used 
-to update the task  in the database */
+to update the task  in the databases */
 export async function updateStatus(id: number, status: string) {
   await prisma.task.update({
     data: {

@@ -18,7 +18,7 @@ interface DataTableToolbarProps {
   table: Table<Employee>;
   className?: string;
 }
-/*A reset  button that resets all filters and sorts.*/
+/*A reset button that resets all filters and sorts.*/
 export function DataTableToolbar({ className, table }: DataTableToolbarProps) {
   const isFiltered = table.getState().columnFilters.length > 0;
   const employees = useEmployees();
