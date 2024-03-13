@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { TaskDialog } from "./task-dialog";
 import { DialogTrigger } from "@radix-ui/react-dialog";
 
+/*This button is  used to open a dialog for creating new tasks.*/
 export function CreateTask() {
   return (
     <TaskDialog>
