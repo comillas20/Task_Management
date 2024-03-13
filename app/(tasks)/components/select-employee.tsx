@@ -9,8 +9,6 @@ import { useEmployees } from "@/hooks/employees";
 import { Employee } from "@prisma/client";
 import { useState } from "react";
 
-/*The part  of the component that is responsible for 
-rendering a select element with employee names*/
 type SelectEmployeeProps = {
   employeeId: number;
   onEmployeeIdChange: (value: number) => void;

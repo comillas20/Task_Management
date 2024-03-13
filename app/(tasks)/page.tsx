@@ -7,9 +7,10 @@ import { getTasks } from "@/actions/task";
 export const metadata: Metadata = {
   title: "Tasks",
 };
-/*This part used to display  the tasks that are assigned to a user.*/
+
 export default async function TaskPage() {
   const tasks = await getTasks();
+
   return (
     <div className="flex h-full flex-1 flex-col space-y-8 p-8">
       <div className="flex items-center justify-between">
@@ -25,7 +26,7 @@ export default async function TaskPage() {
     </div>
   );
 }
-/*This part is used to  generate the navigation buttons for the user page.*/
+
 const navBtns: NavigationButton[] = [
   {
     label: "Employees",
