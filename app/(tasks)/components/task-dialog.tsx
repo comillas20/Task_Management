@@ -26,7 +26,7 @@ import {
 } from "@/components/ui/select";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Task, taskFormSchema } from "@/schema/task-form-schema";
+import { TaskType, taskFormSchema } from "@/schema/task-form-schema";
 import {
   Form,
   FormControl,
@@ -54,7 +54,7 @@ type TaskDialogProps = {
 };
 export function TaskDialog({ data, children }: TaskDialogProps) {
   const { toast } = useToast();
-  const form = useForm<Task>({
+  const form = useForm<TaskType>({
     resolver: zodResolver(taskFormSchema),
     defaultValues: data
       ? {
@@ -70,7 +70,7 @@ export function TaskDialog({ data, children }: TaskDialogProps) {
         },
   });
 
-  async function onSubmit(values: Task) {
+  async function onSubmit(values: TaskType) {
     // server actions can't take complex objects such as Files
     // so I had to wrap the image with FormData
     const image = values.image ? imageWrapper(values.image as File) : undefined;
@@ -79,22 +79,15 @@ export function TaskDialog({ data, children }: TaskDialogProps) {
     if (task) {
       toast({
         title: "Success",
-        description: (
-          <div className="bg-black text-white">
-            <p>Yey</p>
-          </div>
-        ),
+        description: data ? "Updated successfully. " : "Created successfully",
         duration: 5000,
       });
     } else {
       toast({
         title: "Failed",
-        description: (
-          <div className="bg-black text-white">
-            <p>Nay</p>
-          </div>
-        ),
+        description: data ? "Update failed. " : "Create failed",
         duration: 5000,
+        variant: "destructive",
       });
     }
 
