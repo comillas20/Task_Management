@@ -13,6 +13,9 @@ import {
 import { CircleUserRoundIcon } from "lucide-react";
 import Link from "next/link";
 
+
+/*The code below is for the user dropdown, it will show 3 dropdown,
+the user profile, tasks, and logout.*/
 export type NavigationButton = {
   label: string;
   href: string;
