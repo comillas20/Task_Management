@@ -13,7 +13,6 @@ import {
 import { CircleUserRoundIcon } from "lucide-react";
 import Link from "next/link";
 
-
 /*The code below is for the user dropdown, it will show 3 dropdown,
 the user profile, tasks, and logout.*/
 export type NavigationButton = {
@@ -24,8 +23,9 @@ export type NavigationButton = {
 
 type UserNavProps = {
   navBtns: NavigationButton[];
+  username: string;
 };
-export function UserNav({ navBtns }: UserNavProps) {
+export function UserNav({ navBtns, username }: UserNavProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -41,10 +41,8 @@ export function UserNav({ navBtns }: UserNavProps) {
       <DropdownMenuContent className="w-56" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">John Doe</p>
-            <p className="text-xs leading-none text-muted-foreground">
-              m@example.com
-            </p>
+            <p className="text-sm font-medium leading-none">{username}</p>
+            <p className="text-xs leading-none text-muted-foreground">User</p>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
