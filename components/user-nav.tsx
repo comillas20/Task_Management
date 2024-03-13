@@ -10,6 +10,7 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Role } from "@prisma/client";
 import { CircleUserRoundIcon } from "lucide-react";
 import Link from "next/link";
 
@@ -23,9 +24,12 @@ export type NavigationButton = {
 
 type UserNavProps = {
   navBtns: NavigationButton[];
-  username: string;
+  user: {
+    username: string;
+    role: Role;
+  };
 };
-export function UserNav({ navBtns, username }: UserNavProps) {
+export function UserNav({ navBtns, user }: UserNavProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -41,8 +45,10 @@ export function UserNav({ navBtns, username }: UserNavProps) {
       <DropdownMenuContent className="w-56" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">{username}</p>
-            <p className="text-xs leading-none text-muted-foreground">User</p>
+            <p className="text-sm font-medium leading-none">{user.username}</p>
+            <p className="text-xs capitalize leading-none text-muted-foreground">
+              {user.role.toLowerCase()}
+            </p>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />

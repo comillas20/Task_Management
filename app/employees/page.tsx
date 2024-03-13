@@ -23,7 +23,7 @@ export default async function EmployeePage() {
               Manage employee&apos;s details
             </p>
           </div>
-          <UserNav navBtns={navBtns} username={user?.username} />
+          <UserNav navBtns={navBtns} user={user} />
         </div>
         <Employee data={employees} />
       </div>

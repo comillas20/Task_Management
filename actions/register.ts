@@ -15,11 +15,13 @@ export async function registerAccount(values: Register) {
   });
   if (user) return null;
 
+  const isFirst = (await prisma.user.count()) === 0;
   const newUser = await prisma.user.create({
     data: {
       id: userId,
       username: values.username,
       hashed_password: hashedPassword,
+      role: isFirst ? "ADMIN" : "USER",
     },
   });
   return newUser;

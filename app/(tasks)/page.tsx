@@ -25,7 +25,7 @@ export default async function TaskPage() {
               Here&apos;s a list of your tasks
             </p>
           </div>
-          <UserNav navBtns={navBtns} username={user.username} />
+          <UserNav navBtns={navBtns} user={user} />
         </div>
         <Tasks data={tasks} />
       </div>
