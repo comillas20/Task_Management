@@ -16,7 +16,8 @@ import { cn } from "@/lib/utils";
 type TaskCardProps = {
   data: TaskColumnType;
 };
-
+/*This part  is responsible for rendering the task card 
+and it does it by  receiving a prop of type TaskColumnType*/
 export function TaskCard({ data }: TaskCardProps) {
   const priorityColor = priorities.find(
     (priority) => priority.value === data.priority

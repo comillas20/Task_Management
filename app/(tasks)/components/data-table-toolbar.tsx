@@ -18,7 +18,8 @@ interface DataTableToolbarProps {
   table: Table<TaskColumnType>;
   className?: string;
 }
-
+/*This code is used to get a list of employees and put it into
+an array and put it in a dropdown menu*/
 export function DataTableToolbar({ className, table }: DataTableToolbarProps) {
   const isFiltered = table.getState().columnFilters.length > 0;
   const employees = useEmployees();
@@ -29,7 +30,8 @@ export function DataTableToolbar({ className, table }: DataTableToolbarProps) {
           value: employee.name,
         }))
       : [];
-
+  /*This part is a filter for the task, in the view button there
+  is a check list that user can chech or un-check for the filter*/
   return (
     <div className={cn("flex items-center justify-between", className)}>
       <div className="flex flex-1 items-center space-x-2">
