@@ -72,7 +72,7 @@ export function TaskDialog({ data, children }: TaskDialogProps) {
 
   async function onSubmit(values: TaskType) {
     // server actions can't take complex objects such as Files
-    // so I had to wrap the image with FormData
+    // so I had to wrap the image with FormDatas
     const image = values.image ? imageWrapper(values.image as File) : undefined;
     const task = await createOrUpdateTask({ ...values, image });
 

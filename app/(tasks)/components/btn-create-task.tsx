@@ -4,7 +4,7 @@ import { PlusIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { TaskDialog } from "./task-dialog";
 import { DialogTrigger } from "@radix-ui/react-dialog";
-/*This button is  used to open a dialog for creating new tasks.*/
+/*This button is used to open a dialog for creating new task.*/
 export function CreateTask() {
   return (
     <TaskDialog>

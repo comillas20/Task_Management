@@ -26,6 +26,8 @@ interface DataTableRowActionsProps {
   row: Row<Employee>;
 }
 
+/*This code is used to render the dropdown menu for each row in the table.
+And edit information about the employee*/
 export function DataTableRowActions({ row }: DataTableRowActionsProps) {
   const employee = row.original;
 

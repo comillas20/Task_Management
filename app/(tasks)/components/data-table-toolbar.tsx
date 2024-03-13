@@ -31,7 +31,7 @@ export function DataTableToolbar({ className, table }: DataTableToolbarProps) {
         }))
       : [];
   /*This part is a filter for the task, in the view button there
-  is a check list that user can chech or un-check for the filter*/
+  is a check list that user can chech or uncheck for the filter*/
   return (
     <div className={cn("flex items-center justify-between", className)}>
       <div className="flex flex-1 items-center space-x-2">

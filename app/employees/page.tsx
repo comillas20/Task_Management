@@ -9,7 +9,7 @@ import { LOGIN } from "@/routes";
 export const metadata: Metadata = {
   title: "Employees",
 };
-
+/* A page to display all employees in the database */
 export default async function EmployeePage() {
   const user = await getUser();
   const employees = await getEmployees();

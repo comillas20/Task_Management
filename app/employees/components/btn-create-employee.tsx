@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { EmployeeDialog } from "./employee-dialog";
 import { DialogTrigger } from "@radix-ui/react-dialog";
 
+/*A  button that opens the employee dialog when clicked and is used to create new employees*/
 export function CreateEmployee() {
   return (
     <EmployeeDialog>

@@ -15,7 +15,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  /*This part is used  to add the font to the head of every page*/
+  /*This part is used to add the font to the head of every page*/
   return (
     <html lang="en">
       <body className={cn(inter.className, "h-full bg-muted")}>

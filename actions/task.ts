@@ -96,6 +96,10 @@ export async function createOrUpdateTask(values: ModdifiedTask) {
 //     : null;
 //   return moddified;
 // }
+/**
+ * @param  id - Task ID to update 
+ * @returns this returns task that  is not completed and has an employee assigned to it 
+ */
 
 export async function getTasks() {
   const tasks = await prisma.task.findMany({
@@ -110,6 +114,7 @@ export async function getTasks() {
   return tasks;
 }
 
+/*This function is used for deleting task  from the database*/
 export async function deleteTask(id: number) {
   await prisma.task.update({
     data: {
@@ -122,6 +127,8 @@ export async function deleteTask(id: number) {
   revalidatePath("/", "page");
 }
 
+/* This function and the function below is used 
+to update the task  in the databases */
 export async function updateStatus(id: number, status: string) {
   await prisma.task.update({
     data: {
