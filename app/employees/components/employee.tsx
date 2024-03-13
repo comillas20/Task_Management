@@ -21,7 +21,6 @@ import { employeeColumns } from "./employee-columns";
 import { DataTable } from "@/components/data-table";
 import { Employee as em } from "@prisma/client";
 import { DataTableToolbar } from "./data-table-toolbar";
-// import { DataTableToolbar } from "@/components/data-table-toolbar";
 
 type EmployeeProps = {
   data: em[];
@@ -67,10 +66,16 @@ export function Employee({ data }: EmployeeProps) {
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
 
-  return (
-    <div className="space-y-4">
-      <DataTableToolbar table={table} />
-      <DataTable columns={employeeColumns} table={table} />
-    </div>
-  );
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (isMounted)
+    return (
+      <div className="space-y-4">
+        <DataTableToolbar table={table} />
+        <DataTable columns={employeeColumns} table={table} />
+      </div>
+    );
+  else return <div></div>;
 }
