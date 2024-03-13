@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { EmployeeDialog } from "./employee-dialog";
 import { DialogTrigger } from "@radix-ui/react-dialog";
 
+/*This code adds or creates a new employee*/ 
 export function CreateTask() {
   return (
     <EmployeeDialog>

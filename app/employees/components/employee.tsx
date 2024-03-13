@@ -23,6 +23,7 @@ import { Employee as em } from "@prisma/client";
 import { DataTableToolbar } from "./data-table-toolbar";
 // import { DataTableToolbar } from "@/components/data-table-toolbar";
 
+/* A  component that displays a table of employees */
 type EmployeeProps = {
   data: em[];
 };
@@ -66,7 +67,7 @@ export function Employee({ data }: EmployeeProps) {
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
-
+/*This returns  a function that will be called when the component is  mounted or unmounted */
   return (
     <div className="space-y-4">
       <DataTableToolbar table={table} />

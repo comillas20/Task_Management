@@ -8,7 +8,7 @@ export async function getEmployees() {
   const employees = await prisma.employee.findMany();
   return employees;
 }
-
+/* This code is used to create or update employees*/
 export async function createOrUpdateEmployee(data: Employee) {
   const { id, ...others } = data;
   const employee = await prisma.employee.upsert({
@@ -25,7 +25,7 @@ export async function createOrUpdateEmployee(data: Employee) {
   revalidatePath("/employee", "page");
   return employee;
 }
-
+/*This is used to update the status of employees*/
 export async function updateStatus(id: number, status: string) {
   const employee = await prisma.employee.update({
     data: {

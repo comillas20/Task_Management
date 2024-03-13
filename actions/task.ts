@@ -16,7 +16,9 @@ const localTimezone = "Asia/Manila";
 type ModdifiedTask = {
   image?: FormData;
 } & Task;
-
+/*This  is the main function that handles all tasks related end points.
+ It takes in a task object with an  optional image field which should 
+ be of type FormData . If there is no image provided then just pass undefined*/
 export async function createOrUpdateTask(values: ModdifiedTask) {
   const { id, image, ...others } = values;
   const imageFile = image?.get("file") as File | undefined;
@@ -85,6 +87,10 @@ export async function createOrUpdateTask(values: ModdifiedTask) {
 //     : null;
 //   return moddified;
 // }
+/**
+ * @param  id - Task ID to update 
+ * @returns this returns task that  is not completed and has an employee assigned to it 
+ */
 
 export async function getTasks() {
   const tasks = await prisma.task.findMany({
@@ -99,6 +105,7 @@ export async function getTasks() {
   return tasks;
 }
 
+/*This function is used for deleting task  from the database*/
 export async function deleteTask(id: number) {
   await prisma.task.update({
     data: {
@@ -111,6 +118,8 @@ export async function deleteTask(id: number) {
   revalidatePath("/", "page");
 }
 
+/* This function and the function below is used 
+to update the task  in the database */
 export async function updateStatus(id: number, status: string) {
   await prisma.task.update({
     data: {

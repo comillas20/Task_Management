@@ -6,6 +6,8 @@ import { DataTableColumnHeader } from "@/components/data-table-column-header";
 import { DataTableRowActions } from "./data-table-row-actions";
 import { statuses } from "../data/data";
 
+/*This code is used  to define the columns for our data table. 
+It show the employee information*/
 export const employeeColumns: ColumnDef<Employee>[] = [
   {
     accessorKey: "name",
