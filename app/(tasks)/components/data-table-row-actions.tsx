@@ -26,7 +26,7 @@ interface DataTableRowActionsProps {
   row: Row<Task>;
 }
 /*This  component is responsible for rendering the actions 
-dropdown menu in each table row.*/
+dropdown menu in each table rows.*/
 export function DataTableRowActions({ row }: DataTableRowActionsProps) {
   const task = row.original;
 

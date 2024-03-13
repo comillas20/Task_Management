@@ -44,6 +44,7 @@ type EmployeeDialogProps = {
   data?: EmployeeType;
   children: React.ReactNode;
 };
+/* A dialog for creating or updating an employee */
 export function EmployeeDialog({ data, children }: EmployeeDialogProps) {
   const { toast } = useToast();
   const form = useForm<EmployeeType>({

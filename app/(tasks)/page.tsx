@@ -7,7 +7,7 @@ import { getTasks } from "@/actions/task";
 export const metadata: Metadata = {
   title: "Tasks",
 };
-/*This part used to display  the tasks that are assigned to a user.*/
+/*This part used to display the tasks that are assigned to a user.*/
 export default async function TaskPage() {
   const tasks = await getTasks();
 
