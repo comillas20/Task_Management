@@ -7,9 +7,11 @@ import { DataTableRowActions } from "./data-table-row-actions";
 import { format } from "date-fns";
 import { Prisma } from "@prisma/client";
 
+/* This  is a custom column definition that extends the base `Column` definition */
 export type TaskColumnType = Prisma.TaskGetPayload<{
   include: { assignedEmployee: true };
 }>;
+/* We use this to define our typed column and specify what data it should pull out of each row*/
 export const taskColumns: ColumnDef<TaskColumnType>[] = [
   {
     accessorKey: "title",

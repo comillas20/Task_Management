@@ -66,7 +66,7 @@ export function Tasks({ data }: TasksProps) {
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
-
+/*This  is the main component that renders the entire table by utilizing react-table*/
   React.useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -77,6 +77,10 @@ export function Tasks({ data }: TasksProps) {
           (row) => String(row.original.id) === Object.keys(rowSelection)[0]
         )?.original
     : undefined;
+      /*This part is responsible for displaying the selected task in the right
+    panel by passing it as a prop to the RightPanel component and the 
+    following functions are used to handle user interactions with the
+    table such as clicking a cell or pressing keys on their keyboard */
   return (
     <div className="grid grid-cols-5 gap-4">
       <DataTableToolbar className="col-span-full" table={table} />
@@ -95,5 +99,6 @@ export function Tasks({ data }: TasksProps) {
         )}
       </div>
     </div>
+    /* The part above this line handles rendering of the table components*/
   );
 }
