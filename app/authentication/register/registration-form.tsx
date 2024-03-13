@@ -34,8 +34,8 @@ export function RegistrationForm({ handler }: RegistrationFormProps) {
   });
 
   async function onSubmit(data: Register) {
-    const { error } = await handler(data);
-    setMessage(error);
+    const result = await handler(data);
+    if (result) setMessage(result.error);
   }
   const [message, setMessage] = useState<string>();
   const router = useRouter();
