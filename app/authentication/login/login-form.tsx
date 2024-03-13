@@ -16,9 +16,10 @@ import {
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Login, loginFormSchema } from "@/schema/login-form-schema";
+import { useState } from "react";
 
 type LoginFormProps = {
-  handler: (data: Login) => Promise<void>;
+  handler: (data: Login) => Promise<{ error: string }>;
 };
 export default function LoginForm({ handler }: LoginFormProps) {
   const form = useForm<Login>({
@@ -30,8 +31,10 @@ export default function LoginForm({ handler }: LoginFormProps) {
   });
 
   const onSubmit = async (data: Login) => {
-    await handler(data);
+    const { error } = await handler(data);
+    setMessage(error);
   };
+  const [message, setMessage] = useState<string>();
   const router = useRouter();
   return (
     <div className="relative flex h-full items-center justify-center lg:p-8">
@@ -89,6 +92,9 @@ export default function LoginForm({ handler }: LoginFormProps) {
                 )}
               />
             </div>
+            {message && (
+              <p className="text-sm font-medium text-destructive">{message}</p>
+            )}
             <div className="flex flex-col gap-4">
               <div className="w-full space-y-2">
                 <Button

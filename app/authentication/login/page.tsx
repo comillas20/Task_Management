@@ -23,5 +23,7 @@ async function authorize(data: Login) {
       sessionCookie.attributes
     );
     redirect("/");
+  } else {
+    return { error: "Invalid username or password!" };
   }
 }

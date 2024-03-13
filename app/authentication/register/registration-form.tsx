@@ -18,9 +18,10 @@ import { Register, registerFormSchema } from "@/schema/register-form-schema";
 import { Loader2, MoveLeftIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 type RegistrationFormProps = {
-  handler: (data: Register) => Promise<void>;
+  handler: (data: Register) => Promise<{ error: string }>;
 };
 export function RegistrationForm({ handler }: RegistrationFormProps) {
   const form = useForm<Register>({
@@ -33,8 +34,10 @@ export function RegistrationForm({ handler }: RegistrationFormProps) {
   });
 
   async function onSubmit(data: Register) {
-    await handler(data);
+    const { error } = await handler(data);
+    setMessage(error);
   }
+  const [message, setMessage] = useState<string>();
   const router = useRouter();
   return (
     <div className="relative flex h-full items-center justify-center lg:p-8">
@@ -109,6 +112,9 @@ export function RegistrationForm({ handler }: RegistrationFormProps) {
                 )}
               />
             </div>
+            {message && (
+              <p className="text-sm font-medium text-destructive">{message}</p>
+            )}
             <div className="flex flex-col gap-4">
               <Button type="submit" disabled={form.formState.isSubmitting}>
                 {form.formState.isSubmitting && (

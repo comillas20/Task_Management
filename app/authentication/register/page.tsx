@@ -23,5 +23,7 @@ async function authorize(data: Register) {
       sessionCookie.attributes
     );
     redirect("/");
+  } else {
+    return { error: "Username is already taken." };
   }
 }
