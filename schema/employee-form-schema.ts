@@ -6,5 +6,7 @@ export const employeeFormSchema = z.object({
   position: z.string().nullable(),
   contactNo: z.string().nullable(),
   email: z.string().email().nullable(),
-  workingStatus: z.string(),
+  status: z.string(),
 });
+
+export type EmployeeType = z.infer<typeof employeeFormSchema>;
