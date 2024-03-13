@@ -52,7 +52,7 @@ export async function createOrUpdateTask(values: ModdifiedTask) {
       }),
       writeFile(path, buffer),
     ]);
-    revalidatePath("/tasks", "page");
+    revalidatePath("/", "page");
     return task[0];
   }
   return null;
@@ -95,7 +95,7 @@ export async function getTasks() {
       isDeleted: false,
     },
   });
-  revalidatePath("/tasks", "page");
+  revalidatePath("/", "page");
   return tasks;
 }
 
@@ -108,7 +108,7 @@ export async function deleteTask(id: number) {
       id,
     },
   });
-  revalidatePath("/tasks", "page");
+  revalidatePath("/", "page");
 }
 
 export async function updateStatus(id: number, status: string) {
@@ -121,7 +121,7 @@ export async function updateStatus(id: number, status: string) {
     },
   });
 
-  revalidatePath("/tasks", "page");
+  revalidatePath("/", "page");
 }
 
 export async function updatePriority(id: number, priority: string) {
@@ -134,5 +134,5 @@ export async function updatePriority(id: number, priority: string) {
     },
   });
 
-  revalidatePath("/tasks", "page");
+  revalidatePath("/", "page");
 }
