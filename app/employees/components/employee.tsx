@@ -21,7 +21,6 @@ import { employeeColumns } from "./employee-columns";
 import { DataTable } from "@/components/data-table";
 import { Employee as em } from "@prisma/client";
 import { DataTableToolbar } from "./data-table-toolbar";
-// import { DataTableToolbar } from "@/components/data-table-toolbar";
 
 /* A  component that displays a table of employees */
 type EmployeeProps = {
@@ -67,11 +66,17 @@ export function Employee({ data }: EmployeeProps) {
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
-/*This returns  a function that will be called when the component is  mounted or unmounted */
-  return (
-    <div className="space-y-4">
-      <DataTableToolbar table={table} />
-      <DataTable columns={employeeColumns} table={table} />
-    </div>
-  );
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (isMounted)
+    return (
+      <div className="space-y-4">
+        <DataTableToolbar table={table} />
+        <DataTable columns={employeeColumns} table={table} />
+      </div>
+    );
+  else return <div></div>;
 }

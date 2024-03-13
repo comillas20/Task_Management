@@ -37,4 +37,4 @@ export const taskFormSchema = z.object({
 //     }
 // );
 
-export type Task = z.infer<typeof taskFormSchema>;
+export type TaskType = z.infer<typeof taskFormSchema>;

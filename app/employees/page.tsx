@@ -28,6 +28,6 @@ export default async function EmployeePage() {
 const navBtns: NavigationButton[] = [
   {
     label: "Tasks",
-    href: "/tasks",
+    href: "/",
   },
 ];

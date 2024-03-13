@@ -2,7 +2,7 @@
 import { mkdir, readdir, writeFile } from "fs/promises";
 import { join } from "path";
 import prisma from "@/lib/db";
-import { Task } from "@/schema/task-form-schema";
+import { TaskType } from "@/schema/task-form-schema";
 import { utcToZonedTime } from "date-fns-tz";
 import { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
@@ -15,10 +15,8 @@ const localTimezone = "Asia/Manila";
 
 type ModdifiedTask = {
   image?: FormData;
-} & Task;
-/*This  is the main function that handles all tasks related end points.
- It takes in a task object with an  optional image field which should 
- be of type FormData . If there is no image provided then just pass undefined*/
+} & TaskType;
+
 export async function createOrUpdateTask(values: ModdifiedTask) {
   const { id, image, ...others } = values;
   const imageFile = image?.get("file") as File | undefined;
@@ -30,6 +28,7 @@ export async function createOrUpdateTask(values: ModdifiedTask) {
       await readdir(join(process.cwd(), "public/images"));
     } catch (error) {
       // then create the directory if not read/found
+      console.log("Creating directory for images...");
       await mkdir(join(process.cwd(), "public/images"));
     }
     const bytes = await imageFile.arrayBuffer();
@@ -41,7 +40,6 @@ export async function createOrUpdateTask(values: ModdifiedTask) {
         create: {
           ...others,
           imageURL: filename,
-          assignedEmployeeId: others.assignedEmployeeId,
         },
         where: {
           id: id,
@@ -49,15 +47,26 @@ export async function createOrUpdateTask(values: ModdifiedTask) {
         update: {
           ...others,
           imageURL: filename,
-          assignedEmployeeId: others.assignedEmployeeId,
         },
       }),
       writeFile(path, buffer),
     ]);
     revalidatePath("/", "page");
     return task[0];
+  } else {
+    const newTask = await prisma.task.upsert({
+      create: {
+        ...others,
+      },
+      where: {
+        id: id,
+      },
+      update: {
+        ...others,
+      },
+    });
+    return newTask;
   }
-  return null;
 }
 
 // Just in case, they would require unique titles

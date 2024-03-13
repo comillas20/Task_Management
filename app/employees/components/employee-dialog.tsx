@@ -22,8 +22,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import { Loader2 } from "lucide-react";
-import { Employee } from "@prisma/client";
-import { employeeFormSchema } from "@/schema/employee-form-schema";
+import {
+  EmployeeType,
+  employeeFormSchema,
+} from "@/schema/employee-form-schema";
 import { createOrUpdateEmployee } from "@/actions/employee";
 import {
   Select,
@@ -39,13 +41,13 @@ import {
 } from "@/components/form-required-field-mark";
 
 type EmployeeDialogProps = {
-  data?: Employee;
+  data?: EmployeeType;
   children: React.ReactNode;
 };
 /* A  dialog for creating or updating an employee */
 export function EmployeeDialog({ data, children }: EmployeeDialogProps) {
   const { toast } = useToast();
-  const form = useForm<Employee>({
+  const form = useForm<EmployeeType>({
     resolver: zodResolver(employeeFormSchema),
     defaultValues: data
       ? {
@@ -61,7 +63,7 @@ export function EmployeeDialog({ data, children }: EmployeeDialogProps) {
         },
   });
 
-  async function onSubmit(values: Employee) {
+  async function onSubmit(values: EmployeeType) {
     const employee = await createOrUpdateEmployee(values);
     if (employee) {
       toast({
@@ -109,7 +111,6 @@ export function EmployeeDialog({ data, children }: EmployeeDialogProps) {
                 </FormItem>
               )}
             />
-
             <FormField
               name="position"
               control={form.control}
@@ -130,7 +131,13 @@ export function EmployeeDialog({ data, children }: EmployeeDialogProps) {
                 <FormItem>
                   <FormLabel>Contact No.</FormLabel>
                   <FormControl>
-                    <Input {...field} value={field.value ?? ""} />
+                    <Input
+                      {...field}
+                      value={field.value ?? ""}
+                      onChange={({ target }) =>
+                        field.onChange(target.value ? target.value : null)
+                      }
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -143,7 +150,13 @@ export function EmployeeDialog({ data, children }: EmployeeDialogProps) {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input {...field} value={field.value ?? ""} />
+                    <Input
+                      {...field}
+                      value={field.value ?? ""}
+                      onChange={({ target }) =>
+                        field.onChange(target.value ? target.value : null)
+                      }
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
