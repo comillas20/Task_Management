@@ -31,6 +31,13 @@ export function DataTableToolbar({ className, table }: DataTableToolbarProps) {
             value: employee.position as string,
           }))
       : [];
+  const temp = employees.getOccupiedPositions();
+  const employeePositionAsOptions2 = temp
+    ? Array.from(temp).map((position) => ({
+        label: position,
+        value: position,
+      }))
+    : [];
 
   return (
     <div className={cn("flex items-center justify-between", className)}>
@@ -47,7 +54,7 @@ export function DataTableToolbar({ className, table }: DataTableToolbarProps) {
           <DataTableFacetedFilter
             column={table.getColumn("position")}
             title="Position"
-            options={employeePositionAsOptions}
+            options={employeePositionAsOptions2}
           />
         )}
         {table.getColumn("status") && (

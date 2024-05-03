@@ -68,7 +68,11 @@ export default function LoginForm({ handler }: LoginFormProps) {
                   <FormItem className="grid gap-2">
                     <FormLabel>Username</FormLabel>
                     <FormControl>
-                      <Input type="text" placeholder="joemama28" {...field} />
+                      <Input
+                        type="text"
+                        placeholder="Your username"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -84,7 +88,7 @@ export default function LoginForm({ handler }: LoginFormProps) {
                       <Input
                         type="password"
                         {...field}
-                        placeholder="Password"
+                        placeholder="Your password"
                       />
                     </FormControl>
                     <FormMessage />

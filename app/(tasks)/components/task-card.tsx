@@ -60,7 +60,7 @@ export function TaskCard({ data }: TaskCardProps) {
             className="flex items-center justify-center border border-primary bg-muted">
             <Image
               src={"/images/" + data.imageURL}
-              alt="Some image lmao"
+              alt="/images/desktop-bg.png"
               fill
               sizes="450px"
               className="object-cover"

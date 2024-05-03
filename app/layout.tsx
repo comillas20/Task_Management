@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import "@/styles/globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { cn } from "@/lib/utils";
 
@@ -15,7 +15,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  /*This part is used to add the font to the head of every page*/
   return (
     <html lang="en">
       <body className={cn(inter.className, "h-full bg-muted")}>

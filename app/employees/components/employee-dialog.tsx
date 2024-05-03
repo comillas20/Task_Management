@@ -172,7 +172,10 @@ export function EmployeeDialog({ data, children }: EmployeeDialogProps) {
                     <FormRequiredMark />
                   </FormLabel>
                   <FormControl>
-                    <Select value={field.value} onValueChange={field.onChange}>
+                    <Select
+                      value={field.value}
+                      onValueChange={field.onChange}
+                      disabled={!data}>
                       <SelectTrigger>
                         <SelectValue />
                       </SelectTrigger>

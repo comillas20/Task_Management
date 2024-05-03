@@ -2,18 +2,17 @@ import { Metadata } from "next";
 import { NavigationButton, UserNav } from "@/components/user-nav";
 import { Employee } from "./components/employee";
 import { getEmployees } from "@/actions/employee";
-import { getUser } from "@/actions/session";
+import { validateRequest } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { LOGIN } from "@/routes";
 
 export const metadata: Metadata = {
   title: "Employees",
 };
-/* A page to display all employees in the database */
 export default async function EmployeePage() {
-  const user = await getUser();
+  const result = await validateRequest();
   const employees = await getEmployees();
-  if (user)
+  if (result.user)
     return (
       <div className="flex h-full flex-1 flex-col space-y-8 p-8">
         <div className="flex items-center justify-between">
@@ -23,7 +22,7 @@ export default async function EmployeePage() {
               Manage employee&apos;s details
             </p>
           </div>
-          <UserNav navBtns={navBtns} user={user} />
+          <UserNav navBtns={navBtns} user={result.user} />
         </div>
         <Employee data={employees} />
       </div>

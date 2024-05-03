@@ -65,7 +65,6 @@ export function Tasks({ data }: TasksProps) {
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
 
-  /*This is used for the  filter dropdowns in the header of each column*/
   React.useEffect(() => {
     setIsMounted(true);
   }, []);

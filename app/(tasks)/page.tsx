@@ -3,19 +3,19 @@ import { Metadata } from "next";
 import { NavigationButton, UserNav } from "@/components/user-nav";
 import { Tasks } from "./components/tasks";
 import { getTasks } from "@/actions/task";
-import { getUser } from "@/actions/session";
+import { validateRequest } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { LOGIN } from "@/routes";
 
 export const metadata: Metadata = {
   title: "Tasks",
 };
-/*This part used to display the tasks that are assigned to a user.*/
+
 export default async function TaskPage() {
-  const user = await getUser();
+  const result = await validateRequest();
   const tasks = await getTasks();
 
-  if (user)
+  if (result.user)
     return (
       <div className="flex h-full flex-1 flex-col space-y-8 p-8">
         <div className="flex items-center justify-between">
@@ -25,7 +25,7 @@ export default async function TaskPage() {
               Here&apos;s a list of your tasks
             </p>
           </div>
-          <UserNav navBtns={navBtns} user={user} />
+          <UserNav navBtns={navBtns} user={result.user} />
         </div>
         <Tasks data={tasks} />
       </div>

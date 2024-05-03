@@ -1,21 +1,19 @@
+"use client";
+import { logout } from "@/actions/session";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Role } from "@prisma/client";
 import { CircleUserRoundIcon } from "lucide-react";
 import Link from "next/link";
 
-/*The code below is for the user dropdown, it will show 3 dropdown,
-the user profile, tasks, and logout.*/
 export type NavigationButton = {
   label: string;
   href: string;
@@ -60,7 +58,9 @@ export function UserNav({ navBtns, user }: UserNavProps) {
           </DropdownMenuItem>
         ))}
         {navBtns.length > 0 && <DropdownMenuSeparator />}
-        <DropdownMenuItem>Log out</DropdownMenuItem>
+        <DropdownMenuItem onSelect={async () => logout()}>
+          Log out
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

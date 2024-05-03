@@ -1,17 +1,9 @@
 "use server";
-import { mkdir, readdir, writeFile } from "fs/promises";
-import { join } from "path";
 import prisma from "@/lib/db";
 import { TaskType } from "@/schema/task-form-schema";
-import { utcToZonedTime } from "date-fns-tz";
-import { Prisma } from "@prisma/client";
+import { mkdir, readdir, writeFile } from "fs/promises";
 import { revalidatePath } from "next/cache";
-
-// had to do this because prisma auto converts Dates to UTC timezone
-// and I can't do anything to make it use local time zone
-// so Im converting every Dates I get from Prisma to local
-
-const localTimezone = "Asia/Manila";
+import { join } from "path";
 
 type ModdifiedTask = {
   image?: FormData;
@@ -96,10 +88,6 @@ export async function createOrUpdateTask(values: ModdifiedTask) {
 //     : null;
 //   return moddified;
 // }
-/**
- * @param  id - Task ID to update 
- * @returns this returns task that  is not completed and has an employee assigned to it 
- */
 
 export async function getTasks() {
   const tasks = await prisma.task.findMany({
