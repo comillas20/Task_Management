@@ -71,7 +71,7 @@ export function RegistrationForm({ handler }: RegistrationFormProps) {
                   <FormItem>
                     <FormLabel>Username</FormLabel>
                     <FormControl>
-                      <Input placeholder="Example: joemama28" {...field} />
+                      <Input placeholder="Your username" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

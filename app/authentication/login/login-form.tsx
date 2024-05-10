@@ -71,7 +71,11 @@ export default function LoginForm({ handler }: LoginFormProps) {
                       <Input
                         type="text"
                         placeholder="Your username"
-                        {...field}
+                        value={field.value}
+                        onChange={(e) => {
+                          field.onChange(e);
+                          setMessage("");
+                        }}
                       />
                     </FormControl>
                     <FormMessage />
@@ -87,7 +91,11 @@ export default function LoginForm({ handler }: LoginFormProps) {
                     <FormControl>
                       <Input
                         type="password"
-                        {...field}
+                        value={field.value}
+                        onChange={(e) => {
+                          field.onChange(e);
+                          setMessage("");
+                        }}
                         placeholder="Your password"
                       />
                     </FormControl>
