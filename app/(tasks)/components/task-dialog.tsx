@@ -169,7 +169,7 @@ export function TaskDialog({ data, children }: TaskDialogProps) {
                         {selectedImage && (
                           <Image
                             src={selectedImage}
-                            alt="Some image lmao"
+                            alt={data?.imageURL ?? "No image"}
                             fill
                             sizes="350px"
                             className="peer rounded-md object-cover"
@@ -197,7 +197,7 @@ export function TaskDialog({ data, children }: TaskDialogProps) {
                             setSelectedImage(undefined);
                           }
                         }}
-                        accept="image/png, image/jpg"
+                        accept="image/png, image/jpeg"
                         hidden
                       />
                     </FormControl>

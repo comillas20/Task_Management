@@ -16,20 +16,15 @@ import { cn } from "@/lib/utils";
 type TaskCardProps = {
   data: TaskColumnType;
 };
-/*This part is responsible for rendering the task card 
-and it does it by  receiving a prop of type TaskColumnType*/
+
 export function TaskCard({ data }: TaskCardProps) {
   const priorityColor = priorities.find(
     (priority) => priority.value === data.priority
   )?.color;
   return (
-    <Card className="flex min-h-96 flex-col shadow-md">
+    <Card className="flex min-h-96 flex-col pb-4 shadow-md">
       <CardHeader className="flex-row justify-between">
         <div className="flex items-center gap-4">
-          {/* <Avatar>
-            <AvatarImage />
-            <AvatarFallback>CD</AvatarFallback>
-          </Avatar> */}
           <div>
             <h5 className="text-sm font-medium">
               {data?.assignedEmployee.name}
@@ -60,7 +55,7 @@ export function TaskCard({ data }: TaskCardProps) {
             className="flex items-center justify-center border border-primary bg-muted">
             <Image
               src={"/images/" + data.imageURL}
-              alt="/images/desktop-bg.png"
+              alt={data.imageURL}
               fill
               sizes="450px"
               className="object-cover"
@@ -69,10 +64,6 @@ export function TaskCard({ data }: TaskCardProps) {
           </AspectRatio>
         )}
       </CardContent>
-      <CardFooter className="justify-end gap-4">
-        {/* <Button variant="outline">Canceled</Button>
-        <Button>Finished</Button> */}
-      </CardFooter>
     </Card>
   );
 }
