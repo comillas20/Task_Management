@@ -1,13 +1,13 @@
 "use server";
 import prisma from "@/lib/db";
 import { TaskType } from "@/schema/task-form-schema";
-import { mkdir, readdir, writeFile } from "fs/promises";
+import { access, mkdir, readdir, writeFile } from "fs/promises";
 import { revalidatePath } from "next/cache";
-import { join } from "path";
+import { join, parse } from "path";
 
 type ModdifiedTask = {
   image?: FormData;
-} & TaskType;
+} & Omit<TaskType, "image">;
 
 export async function createOrUpdateTask(values: ModdifiedTask) {
   const { id, image, ...others } = values;
@@ -20,12 +20,12 @@ export async function createOrUpdateTask(values: ModdifiedTask) {
       await readdir(join(process.cwd(), "public/images"));
     } catch (error) {
       // then create the directory if not read/found
-      console.log("Creating directory for images...");
       await mkdir(join(process.cwd(), "public/images"));
     }
     const bytes = await imageFile.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    const path = join(process.cwd(), "public/images", imageFile.name);
+    const moddifiedFileName = await modifyFilename(imageFile.name);
+    const path = join(process.cwd(), "public/images", moddifiedFileName);
 
     const task = await Promise.all([
       prisma.task.upsert({
@@ -59,6 +59,25 @@ export async function createOrUpdateTask(values: ModdifiedTask) {
     });
     return newTask;
   }
+}
+
+async function modifyFilename(filename: string) {
+  let fileExists = true;
+  let newFilename = filename;
+
+  for (var i = 2; fileExists; i++) {
+    try {
+      await access(join(process.cwd(), "public/images", newFilename));
+      const parsedPath = parse(filename);
+      newFilename = join(
+        parsedPath.dir,
+        `${parsedPath.name} (${i})${parsedPath.ext}`
+      );
+    } catch (err) {
+      fileExists = false;
+    }
+  }
+  return newFilename;
 }
 
 // Just in case, they would require unique titles

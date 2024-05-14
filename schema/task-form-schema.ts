@@ -1,3 +1,4 @@
+import { isImage } from "@/lib/utils";
 import { z } from "zod";
 
 export const taskFormSchema = z.object({
@@ -7,9 +8,14 @@ export const taskFormSchema = z.object({
   status: z.string(),
   priority: z.string(),
   image: z
-    .custom((value) => value instanceof File, {
-      message: "Invalid File!",
-    })
+    .instanceof(File)
+    .refine(
+      (value) => {
+        console.log(isImage(value));
+        return isImage(value);
+      },
+      { message: "Invalid image" }
+    )
     .optional()
     .nullable(),
   assignedEmployeeId: z
