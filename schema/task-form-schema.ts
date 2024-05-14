@@ -9,13 +9,7 @@ export const taskFormSchema = z.object({
   priority: z.string(),
   image: z
     .instanceof(File)
-    .refine(
-      (value) => {
-        console.log(isImage(value));
-        return isImage(value);
-      },
-      { message: "Invalid image" }
-    )
+    .refine((value) => isImage(value), { message: "Invalid image" })
     .optional()
     .nullable(),
   assignedEmployeeId: z
