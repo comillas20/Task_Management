@@ -43,7 +43,7 @@ export async function createOrUpdateTask(values: ModdifiedTask) {
       }),
       writeFile(path, buffer),
     ]);
-    revalidatePath("/", "page");
+    revalidatePath("/(tasks)", "page");
     return task[0];
   } else {
     const newTask = await prisma.task.upsert({
@@ -57,6 +57,7 @@ export async function createOrUpdateTask(values: ModdifiedTask) {
         ...others,
       },
     });
+    revalidatePath("/(tasks)", "page");
     return newTask;
   }
 }
