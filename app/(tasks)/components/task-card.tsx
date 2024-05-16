@@ -50,18 +50,20 @@ export function TaskCard({ data }: TaskCardProps) {
 
         <p className="text-sm">{data.description ?? "<No description>"}</p>
         {data.imageURL && (
-          <AspectRatio
-            ratio={16 / 9}
-            className="flex items-center justify-center border border-primary bg-muted">
-            <Image
-              src={"/images/" + data.imageURL}
-              alt={data.imageURL}
-              fill
-              sizes="450px"
-              className="object-cover"
-              loading="lazy"
-            />
-          </AspectRatio>
+          <div className="flex w-1/2 flex-col gap-2">
+            <span className="text-sm font-medium">Attachment</span>
+            <AspectRatio
+              ratio={16 / 9}
+              className="flex items-center justify-center border border-primary bg-muted">
+              <Image
+                src={"/images/" + data.imageURL}
+                alt={data.imageURL}
+                fill
+                className="object-cover"
+                loading="lazy"
+              />
+            </AspectRatio>
+          </div>
         )}
       </CardContent>
     </Card>

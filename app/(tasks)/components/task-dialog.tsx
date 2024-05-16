@@ -38,7 +38,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
-import { Loader2 } from "lucide-react";
+import { Loader2, Upload } from "lucide-react";
 import { createOrUpdateTask } from "@/actions/task";
 import { imageWrapper } from "@/lib/utils";
 import { Task as T } from "@prisma/client";
@@ -95,8 +95,10 @@ export function TaskDialog({ data, children }: TaskDialogProps) {
     form.reset();
   }
 
+  const defaultImage =
+    data && data.imageURL ? "/images/" + data.imageURL : undefined;
   const [selectedImage, setSelectedImage] = useState<string | undefined>(
-    data && data.imageURL ? "/images/" + data.imageURL : undefined
+    defaultImage
   );
   return (
     <Dialog>
@@ -158,30 +160,93 @@ export function TaskDialog({ data, children }: TaskDialogProps) {
             />
             <div className="flex gap-4">
               <FormField
-                name="image"
+                name="priority"
                 control={form.control}
                 render={({ field }) => (
                   <FormItem className="flex-1">
                     <FormLabel>
-                      <AspectRatio
-                        ratio={16 / 9}
-                        className="relative border border-primary bg-muted">
-                        {selectedImage && (
-                          <Image
-                            src={selectedImage}
-                            alt={data?.imageURL ?? "No image"}
-                            fill
-                            sizes="350px"
-                            className="peer rounded-md object-cover"
-                          />
-                        )}
-                        <div className="absolute flex h-full w-full items-center justify-center bg-transparent">
-                          <span className={buttonVariants()}>Upload</span>
-                        </div>
-                      </AspectRatio>
+                      Priority
+                      <FormRequiredMark />
                     </FormLabel>
                     <FormControl>
-                      <input
+                      <Select
+                        value={field.value}
+                        onValueChange={field.onChange}>
+                        <SelectTrigger>
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {priorities.map((priority) => (
+                            <SelectItem
+                              key={priority.value}
+                              value={priority.value}>
+                              {priority.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                name="status"
+                control={form.control}
+                render={({ field }) => (
+                  <FormItem className="flex-1">
+                    <FormLabel>
+                      Status
+                      <FormRequiredMark />
+                    </FormLabel>
+                    <FormControl>
+                      <Select
+                        value={field.value}
+                        onValueChange={field.onChange}>
+                        <SelectTrigger>
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {statuses.map((status) => (
+                            <SelectItem key={status.value} value={status.value}>
+                              {status.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <FormField
+              name="image"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem className="grid flex-1 grid-cols-3 gap-4">
+                  <FormLabel>
+                    <AspectRatio
+                      ratio={16 / 9}
+                      className="relative border border-primary bg-muted">
+                      {selectedImage && (
+                        <Image
+                          src={selectedImage}
+                          alt={data?.imageURL ?? "No image"}
+                          fill
+                          sizes="350px"
+                          className="peer rounded-md object-cover"
+                        />
+                      )}
+                      <div className="absolute flex h-full w-full items-center justify-center bg-transparent">
+                        <Upload className="text-primary" size={20} />
+                      </div>
+                    </AspectRatio>
+                  </FormLabel>
+                  <div className="col-span-2 flex flex-col gap-2">
+                    <FormLabel>Attachment (Image)</FormLabel>
+                    <FormControl>
+                      <Input
                         type="file"
                         onChange={({ target }) => {
                           if (target.files) {
@@ -198,85 +263,25 @@ export function TaskDialog({ data, children }: TaskDialogProps) {
                           }
                         }}
                         accept="image/png, image/jpeg"
-                        hidden
                       />
                     </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <div className="flex flex-col gap-4">
-                <FormField
-                  name="priority"
-                  control={form.control}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>
-                        Priority
-                        <FormRequiredMark />
-                      </FormLabel>
-                      <FormControl>
-                        <Select
-                          value={field.value}
-                          onValueChange={field.onChange}>
-                          <SelectTrigger>
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {priorities.map((priority) => (
-                              <SelectItem
-                                key={priority.value}
-                                value={priority.value}>
-                                {priority.label}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  name="status"
-                  control={form.control}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>
-                        Status
-                        <FormRequiredMark />
-                      </FormLabel>
-                      <FormControl>
-                        <Select
-                          value={field.value}
-                          onValueChange={field.onChange}>
-                          <SelectTrigger>
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {statuses.map((status) => (
-                              <SelectItem
-                                key={status.value}
-                                value={status.value}>
-                                {status.label}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-            </div>
+                  </div>
+
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <FormRequiredLabel />
             <DialogFooter>
               <DialogClose
                 type="button"
                 className={buttonVariants({
                   variant: "outline",
-                })}>
+                })}
+                onClick={() => {
+                  setSelectedImage(defaultImage);
+                  form.reset();
+                }}>
                 Cancel
               </DialogClose>
               <Button
