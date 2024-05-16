@@ -48,7 +48,9 @@ export function TaskCard({ data }: TaskCardProps) {
           <span className="text-sm capitalize">{data.status} Task</span>
         </div>
 
-        <p className="text-sm">{data.description ?? "<No description>"}</p>
+        <p className="w-full whitespace-pre-wrap break-words text-sm">
+          {data.description ?? "<No description>"}
+        </p>
         {data.imageURL && (
           <div className="flex w-1/2 flex-col gap-2">
             <span className="text-sm font-medium">Attachment</span>

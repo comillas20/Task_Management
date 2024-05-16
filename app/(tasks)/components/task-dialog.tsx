@@ -284,15 +284,17 @@ export function TaskDialog({ data, children }: TaskDialogProps) {
                 }}>
                 Cancel
               </DialogClose>
-              <Button
+              <DialogClose
                 type="submit"
-                className="space-x-2"
+                className={buttonVariants({
+                  className: "space-x-2",
+                })}
                 disabled={form.formState.isSubmitting}>
                 {form.formState.isSubmitting && (
                   <Loader2 className="animate-spin" />
                 )}
                 Save
-              </Button>
+              </DialogClose>
             </DialogFooter>
           </form>
         </Form>
