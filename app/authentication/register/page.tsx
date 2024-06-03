@@ -4,9 +4,21 @@ import { registerAccount } from "@/actions/register";
 import { cookies } from "next/headers";
 import { lucia } from "@/lib/auth";
 import { redirect } from "next/navigation";
+import { ENABLE_REGISTRATION } from "@/routes";
+import { Separator } from "@/components/ui/separator";
 
 export default async function RegistrationPage() {
-  return <RegistrationForm handler={authorize} />;
+  if (ENABLE_REGISTRATION) return <RegistrationForm handler={authorize} />;
+  else
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-muted sm:-my-4">
+        <div className="flex gap-4">
+          <h5 className="text-xl font-semibold">404</h5>
+          <Separator orientation="vertical" className="h-auto" />
+          <h5 className="text-lg font-medium">Nuh uh</h5>
+        </div>
+      </main>
+    );
 }
 
 // Note: Cookies (or the next/header package) are only allowed in Server Components

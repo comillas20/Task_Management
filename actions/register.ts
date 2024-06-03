@@ -2,8 +2,11 @@ import { Argon2id } from "oslo/password";
 import { generateId } from "lucia";
 import { Register } from "@/schema/register-form-schema";
 import prisma from "@/lib/db";
+import { ENABLE_REGISTRATION } from "@/routes";
 
 export async function registerAccount(values: Register) {
+  if (!ENABLE_REGISTRATION) return null;
+
   const hashedPassword = await new Argon2id().hash(values.password);
   const userId = generateId(15);
 
